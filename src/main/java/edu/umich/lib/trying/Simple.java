@@ -28,11 +28,17 @@ public class Simple extends RubyObject {
         return simple;
     }
 
+    @JRubyMethod(name="one")
+    public IRubyObject one(ThreadContext context) {
+      return this.getInstanceVariable("one");
+    }
+
     @JRubyMethod(name = "hello")
     public IRubyObject hello(ThreadContext context, IRubyObject other) {
 
         Ruby runtime = context.getRuntime();
         RubyString str = (RubyString) other;
+        this.setInstanceVariable("one", RubyString.newString(context.getRuntime(), "two"));
         return str.append(str);
     }
 
