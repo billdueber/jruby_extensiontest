@@ -12,7 +12,7 @@ module Edu
           end
           
           def one_value
-            return @one
+            return "Origianl ruby definition"
           end
           
         end
@@ -21,6 +21,8 @@ module Edu
   end
 end
 
+puts Edu::Umich::Lib::Trying::Simple.new.one_value
+
 require 'simple'
 
 module Ext
@@ -28,9 +30,21 @@ module Ext
 end
 
 
-
 s = Ext::Simple.new
 puts s.hello('Bill')
 puts s.one
 puts s.one_value
+
+module Ext
+  class Simple
+    def one_value
+      return "And changed it back again"
+    end
+  end
+end
+
+puts s.one_value
+
+
+
 puts s.hi("William John")

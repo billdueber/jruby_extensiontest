@@ -46,7 +46,7 @@ public class Simple extends RubyObject {
     @JRubyMethod(name="one_value")
     public IRubyObject one_value(ThreadContext context) {
       Ruby runtime = context.getRuntime();
-      return RubyString.newString(runtime, "Hi there, handsome");
+      return RubyString.newString(runtime, "Java definition");
     }
 
 }
