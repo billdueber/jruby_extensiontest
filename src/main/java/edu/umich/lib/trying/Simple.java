@@ -42,5 +42,11 @@ public class Simple extends RubyObject {
         this.setInstanceVariable("@one", RubyString.newString(runtime, "two"));
         return str.append(str);
     }
+    
+    @JRubyMethod(name="one_value")
+    public IRubyObject one_value(ThreadContext context) {
+      Ruby runtime = context.getRuntime();
+      return RubyString.newString(runtime, "Hi there, handsome");
+    }
 
 }

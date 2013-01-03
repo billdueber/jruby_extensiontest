@@ -31,5 +31,6 @@ end
 
 s = Ext::Simple.new
 puts s.hello('Bill')
+puts s.one
 puts s.one_value
 puts s.hi("William John")
