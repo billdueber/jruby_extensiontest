@@ -8,6 +8,7 @@ import org.jruby.RubyModule;
 import org.jruby.runtime.ObjectAllocator;
 import org.jruby.runtime.builtin.IRubyObject;
 import org.jruby.runtime.load.BasicLibraryService;
+import org.jruby.runtime.ThreadContext;
 
 /**
  * Service defining the module and loading the {@link Fibonacci} class.
@@ -26,15 +27,21 @@ public class SimpleService implements BasicLibraryService {
 
     @Override
     public boolean basicLoad(Ruby runtime) throws IOException {
+        ThreadContext ctx = runtime.getCurrentContext();
+      
         // The Ruby module structure must mirror the Java package name.
-        // Here Com::Weblogism::Myjrubyext --> com.weblogism.myjrubyext
+        // Note that the class can already exist -- you can build
+        // part of the class functionality in Ruby and then
+        // load up your java class to extend it
         RubyModule edu = runtime.defineModule("Edu");
         RubyModule umich = edu.defineModuleUnder("Umich");
         RubyModule lib = umich.defineModuleUnder("Lib");
         RubyModule trying = lib.defineModuleUnder("Trying");
         RubyClass simpleclass = trying.defineClassUnder("Simple", runtime.getObject(), SIMPLE_ALLOCATOR);
+        simpleclass.addReadWriteAttribute(ctx, "one");
 
         simpleclass.defineAnnotatedMethods(Simple.class);
+        
 
         return true;
     }

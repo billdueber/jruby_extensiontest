@@ -19,7 +19,7 @@ import org.jruby.runtime.builtin.IRubyObject;
 @JRubyClass(name = "Edu::Umich::Lib::Trying::Simple")
 public class Simple extends RubyObject {
     public Simple(Ruby runtime, RubyClass metaClass) {
-        super(runtime, metaClass);
+        super(runtime, metaClass);        
     }
 
     @JRubyMethod(name = "new", meta = true, rest = true)
@@ -28,17 +28,18 @@ public class Simple extends RubyObject {
         return simple;
     }
 
-    @JRubyMethod(name="one")
-    public IRubyObject one(ThreadContext context) {
-      return this.getInstanceVariable("one");
-    }
+    // Move it to the ruby impl
+    // @JRubyMethod(name="one")
+    // public IRubyObject one(ThreadContext context) {
+    //   return this.getInstanceVariable("one");
+    // }
 
     @JRubyMethod(name = "hello")
     public IRubyObject hello(ThreadContext context, IRubyObject other) {
 
         Ruby runtime = context.getRuntime();
         RubyString str = (RubyString) other;
-        this.setInstanceVariable("one", RubyString.newString(context.getRuntime(), "two"));
+        this.setInstanceVariable("@one", RubyString.newString(runtime, "two"));
         return str.append(str);
     }
 
