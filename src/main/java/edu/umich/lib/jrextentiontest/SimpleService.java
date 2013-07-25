@@ -1,4 +1,4 @@
-package edu.umich.lib.trying;
+package edu.umich.lib.jrextentiontest;
 
 import java.io.IOException;
 
@@ -36,7 +36,7 @@ public class SimpleService implements BasicLibraryService {
         RubyModule edu = runtime.defineModule("Edu");
         RubyModule umich = edu.defineModuleUnder("Umich");
         RubyModule lib = umich.defineModuleUnder("Lib");
-        RubyModule trying = lib.defineModuleUnder("Trying");
+        RubyModule trying = lib.defineModuleUnder("Jrextentiontest");
         RubyClass simpleclass = trying.defineClassUnder("Simple", runtime.getObject(), SIMPLE_ALLOCATOR);
         simpleclass.addReadWriteAttribute(ctx, "one");
 

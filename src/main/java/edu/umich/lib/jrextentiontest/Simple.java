@@ -1,4 +1,4 @@
-package edu.umich.lib.trying;
+package edu.umich.lib.jrextentiontest;
 
 import org.jruby.Ruby;
 import org.jruby.RubyClass;
@@ -16,7 +16,7 @@ import org.jruby.runtime.builtin.IRubyObject;
  * 
  * @author Sébastien Le Callonnec
  */
-@JRubyClass(name = "Edu::Umich::Lib::Trying::Simple")
+@JRubyClass(name = "Edu::Umich::Lib::Jrextentiontest::Simple")
 public class Simple extends RubyObject {
     public Simple(Ruby runtime, RubyClass metaClass) {
         super(runtime, metaClass);        
@@ -33,6 +33,13 @@ public class Simple extends RubyObject {
     // public IRubyObject one(ThreadContext context) {
     //   return this.getInstanceVariable("one");
     // }
+    
+    @JRubyMethod(name = "call_hi")
+    public IRubyObject call_hi(ThreadContext context) {
+      Ruby runtime = context.getRuntime();
+      RubyString str = RubyString.newString(runtime,  "...from Java land");
+      return this.callMethod("hi", str);
+    }
 
     @JRubyMethod(name = "hello")
     public IRubyObject hello(ThreadContext context, IRubyObject other) {
@@ -46,7 +53,7 @@ public class Simple extends RubyObject {
     @JRubyMethod(name="one_value")
     public IRubyObject one_value(ThreadContext context) {
       Ruby runtime = context.getRuntime();
-      return RubyString.newString(runtime, "Java definition");
+      return RubyString.newString(runtime, "...redefined in Java code");
     }
 
 }
